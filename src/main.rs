@@ -5,7 +5,11 @@ use std::error;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn error::Error>> {
     println!("Hello, world!");
-    let peripherals = lib::btadapter::get_peripherals().await?;
+
+    let uuid = 0x1826;
+    println!("{:?}", uuid);
+
+    let peripherals = lib::btadapter::get_peripherals_uuid(uuid).await?;
     for periph in peripherals {
         let properties = periph.properties().await?;
         println!("{:?}", properties);
